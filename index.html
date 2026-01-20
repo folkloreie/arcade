@@ -47,12 +47,14 @@
         linear-gradient(180deg, #eef7ff 0%, #ffeef6 100%);
     }
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-    }
+    body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  /* replace padding 14px */
+  padding: calc(14px + var(--safe-top)) 14px calc(14px + var(--safe-bottom));
+}
 
     button {
       font: inherit;
@@ -124,6 +126,7 @@
 
       /* Screen height tuned so claim never clips */
       --screen-h: 404px;
+      --deck-gap: 18px;
 
       /* Safe areas */
       --safe-top: max(env(safe-area-inset-top, 0px), constant(safe-area-inset-top, 0px));
@@ -254,6 +257,7 @@
   padding-bottom: 16px;
   box-shadow: var(--shadow-1);
   position: relative;
+  margin-bottom: var(--deck-gap);
 }
 
     .panel::before {
@@ -281,7 +285,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-bottom: 92px;
     }
 
     .screen::before {
@@ -298,7 +301,7 @@
       width: 100%;
       height: 100%;
       padding: 0 18px;
-      padding-bottom: calc(14px + var(--safe-bottom));
+      padding-bottom: 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -999,7 +1002,8 @@ justify-content: center;
     /* joystick (decorative) */
     .joystick {
       position: absolute;
-      left: 100px;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: 38px;
       width: 92px;
       height: 92px;
@@ -1071,6 +1075,12 @@ justify-content: center;
   left: 50%;
 }
 
+@supports (-webkit-touch-callout: none) {
+  :root{
+    --deck-gap: 28px; /* iPhone butuh gap lebih */
+  }
+}
+
     /* ticket slot */
     .slot {
       position: absolute;
@@ -1099,6 +1109,7 @@ justify-content: center;
       :root {
         --cab-h: 700px;
         --screen-h: 392px;
+        --deck-gap: 18px; /* jarak kosong antara panel dan deck */
       }
 
       .title h1 { font-size: 25px; }

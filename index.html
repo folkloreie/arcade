@@ -126,8 +126,8 @@
       --screen-h: 404px;
 
       /* Safe areas */
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: max(env(safe-area-inset-top, 0px), constant(safe-area-inset-top, 0px));
+      --safe-bottom: max(env(safe-area-inset-bottom, 0px), constant(safe-area-inset-bottom, 0px));
     }
 
     /* ========================================================= */
@@ -433,7 +433,8 @@
     .gift-grid {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, 72px);
+justify-content: center;
       gap: 14px;
       align-items: center;
       justify-items: center;
@@ -571,13 +572,16 @@
     }
 
     .claim-btn{
+  line-height: 1;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   width: 56%;
-  padding: 10px 16px;
+  padding: 9px 14px;
       border-radius: 999px;
       border: var(--stroke-w) solid var(--stroke);
       background: rgba(255,255,255,0.94);
       color: var(--ink);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 800;
       letter-spacing: 0.35px;
       user-select: none;
@@ -1025,15 +1029,18 @@
       box-shadow: 0 10px 18px rgba(0,0,0,0.10);
     }
 
-    /* pill buttons (decorative) */
-    .btns {
-      position: absolute;
-      right: 5px;
-      bottom: 100px;
-      display: flex;
-      gap: 100px;
-      align-items: center;
-    }
+/* pill buttons (decorative) */
+.btns{
+  position: absolute;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  bottom: 100px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
 
     .btn-pill {
       width: 84px;
@@ -1045,6 +1052,8 @@
 
     .btn-pill.blue { background: rgba(190,225,255,0.95); }
     .btn-pill.pink { background: rgba(255,205,226,0.95); }
+.btn-pill.blue{ margin-right: 18px; }
+.btn-pill.pink{ margin-left: 18px; } 
 
     /* ticket slot */
     .slot {
@@ -1710,7 +1719,7 @@ resumeArmed: false,
       modalBody.innerHTML = meta.contentHTML;
       modal.classList.add("open");
 
-      backDecor.classList.add("show");
+      backDecor.classList.remove("show");
 
       // Playlist button wiring
       const playlistBtn = $("#playlistBtn", modalBody);
@@ -1725,8 +1734,8 @@ resumeArmed: false,
   window.location.assign(state.playlistUrl);
 };
 
-onPress(playlistBtn, () => goPlaylist());
-onKeyPress(playlistBtn, () => goPlaylist());
+onPress(playlistBtn, goPlaylist);
+onKeyPress(playlistBtn, goPlaylist);
       }
 
       // Particles per gift

@@ -68,6 +68,12 @@
       max-width: 100%;
     }
 
+@supports (-webkit-touch-callout: none) {
+  .back-decor{
+    bottom: calc(92px + var(--safe-bottom));
+  }
+}
+
     /* ========================================================= */
     /* ========================= THEME ========================= */
     /* ========================================================= */
@@ -245,6 +251,7 @@
     /* ========================= PANEL ========================= */
     /* ========================================================= */
     .panel {
+      padding-bottom: 16px;
       width: 92%;
       margin-top: 14px;
       border-radius: var(--radius-panel);
@@ -928,7 +935,7 @@ justify-content: center;
     .back-decor {
       position: absolute;
       right: 14px;
-      bottom: calc(14px + var(--safe-bottom));
+      bottom: calc(82px + var(--safe-bottom));
       width: 48px;
       height: 48px;
       border-radius: 999px;
